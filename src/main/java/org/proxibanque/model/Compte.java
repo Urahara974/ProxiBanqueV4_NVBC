@@ -117,6 +117,7 @@ public abstract class Compte implements Serializable{
 	 * Constructeur par defaut
 	 */
 	public Compte() {
+		super();
 	}
 
 	/**

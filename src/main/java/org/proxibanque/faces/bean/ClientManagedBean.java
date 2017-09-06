@@ -42,6 +42,41 @@ public class ClientManagedBean implements Serializable {
     public void init() {
 		refreshList();
     }
+	
+	
+	private String numCompteDebiteur;
+	private String numCompteCrediteur;
+	private double montantTransfert;
+
+	public String getNumCompteDebiteur() {
+		return numCompteDebiteur;
+	}
+
+
+	public void setNumCompteDebiteur(String numCompteDebiteur) {
+		this.numCompteDebiteur = numCompteDebiteur;
+	}
+
+
+	public String getNumCompteCrediteur() {
+		return numCompteCrediteur;
+	}
+
+
+	public void setNumCompteCrediteur(String numCompteCrediteur) {
+		this.numCompteCrediteur = numCompteCrediteur;
+	}
+
+
+	public double getMontantTransfert() {
+		return montantTransfert;
+	}
+
+
+	public void setMontantTransfert(double montantTransfert) {
+		this.montantTransfert = montantTransfert;
+	}
+
 
 
 
@@ -59,6 +94,17 @@ public class ClientManagedBean implements Serializable {
 		
 	}
 
+	
+	public void virement() {
+		try {
+			clientService.virement(this.numCompteDebiteur, this.numCompteCrediteur, this.montantTransfert);
+			refreshList();
+			notificationSuccess("virement");
+		} catch (Exception e) {
+			notificationError(e,"virement");
+			e.printStackTrace();
+		}
+	}
 	
 	public void save() {
 		try {

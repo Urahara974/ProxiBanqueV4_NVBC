@@ -15,5 +15,7 @@ public interface ClientService {
 	List<Client> findAll() throws Exception;
 
 	Client findById(int id) throws Exception;
+	
+	void virement(String numCompteDebiteur, String numCompteCrediteur, double montantTransfert) throws Exception;
 
 }
