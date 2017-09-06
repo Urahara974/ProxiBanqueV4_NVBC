@@ -43,8 +43,7 @@ public abstract class Compte implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID", nullable = false)
 	private int id;
-	@Column(name = "NUMERO_COMPTE")
-	private String numeroCompte;
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "DATE_OUVERTURE")
 	private Date dateOuverture = new Date();
@@ -67,13 +66,11 @@ public abstract class Compte implements Serializable{
 	// Getters et Setters
 	
 
-	public String getNumeroCompte() {
-		return numeroCompte;
-	}
+
 
 	@Override
 	public String toString() {
-		return "Compte [numeroCompte=" + numeroCompte + ", Solde=" + Solde + "]";
+		return "Compte [Solde=" + Solde + "]";
 	}
 
 	public String getNumeroAgence() {
@@ -84,9 +81,7 @@ public abstract class Compte implements Serializable{
 		this.numeroAgence = numeroAgence;
 	}
 
-	public void setNumeroCompte(String numeroCompte) {
-		this.numeroCompte = numeroCompte;
-	}
+
 
 	public Date getDateOuverture() {
 		return dateOuverture;
@@ -133,12 +128,6 @@ public abstract class Compte implements Serializable{
 	}
 
 	
-	public Compte(String numeroCompte, Date dateOuverture, double solde) {
-		super();
-		this.numeroCompte = numeroCompte;
-		this.dateOuverture = dateOuverture;
-		Solde = solde;
-	}
 	
 	
 

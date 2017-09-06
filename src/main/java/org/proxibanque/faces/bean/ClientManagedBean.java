@@ -85,6 +85,9 @@ public class ClientManagedBean implements Serializable {
 		this.clientSelected = new Client();
 		this.list = new ArrayList<Client>();
 		this.listSelected = new ArrayList<Client>();
+		this.numCompteDebiteur="";
+		this.numCompteCrediteur="";
+		this.montantTransfert=0.0;
 		try {
 			this.list.addAll(clientService.findAll());
 			this.listSelected.addAll(list);

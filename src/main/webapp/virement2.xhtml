@@ -82,102 +82,111 @@
 
 
 			</h:form>
-			
-<!-- 			<h:form id="form1" style=""> -->
-<!-- 				<p:growl id="messages" showDetail="true" /> -->
-<!-- 				<p:panel id="panel"> -->
-<!-- 					<p:messages /> -->
-<!-- 										<h4>Informations client</h4> -->
-<!-- 					<h:panelGrid id="display" columns="2" cellpadding="4" style=""> -->
+
+			<!-- 			<h:form id="form1" style=""> -->
+			<!-- 				<p:growl id="messages" showDetail="true" /> -->
+			<!-- 				<p:panel id="panel"> -->
+			<!-- 					<p:messages /> -->
+			<!-- 										<h4>Informations client</h4> -->
+			<!-- 					<h:panelGrid id="display" columns="2" cellpadding="4" style=""> -->
 
 
-<!-- 												<p:column rowspan="2" style="font-weight: bold;"> -->
-<!-- 													<h4>Informations client</h4> -->
-<!-- 												</p:column> -->
+			<!-- 												<p:column rowspan="2" style="font-weight: bold;"> -->
+			<!-- 													<h4>Informations client</h4> -->
+			<!-- 												</p:column> -->
 
 
-<!-- 						<h:outputText value="Numéro du compte à débiter" for="numCompteDebiteur" -->
-<!-- 							style="padding-left: 30px; padding-right: 30px;" /> -->
-<!-- 						<p:inputText id="numCompteDebiteur" -->
-<!-- 							value="#{clientManagedBean.numCompteDebiteur}" required="true" -->
-<!-- 							label="Numéro compte débiteur" requiredMessage="Vous devez entrer un numéro" -->
-<!-- 							placeholder="Numéro compte débiteur" type="text"> -->
-<!-- 							<f:validateLength minimum="3" /> -->
-<!-- 						</p:inputText> -->
-
-
-
-<!-- 						<h:outputText value="Numéro du compte à créditer" for="numCompteCrediteur" -->
-<!-- 							style="padding-left: 30px; padding-right: 30px;" /> -->
-<!-- 						<p:inputText id="numCompteCrediteur" -->
-<!-- 							value="#{clientManagedBean.numCompteCrediteur}" required="true" -->
-<!-- 							label="Numéro compte créditer" requiredMessage="Vous devez entrer un numéro" -->
-<!-- 							placeholder="Numéro compte créditer" type="text"> -->
-<!-- 							<f:validateLength minimum="3" /> -->
-<!-- 						</p:inputText> -->
+			<!-- 						<h:outputText value="Numéro du compte à débiter" for="numCompteDebiteur" -->
+			<!-- 							style="padding-left: 30px; padding-right: 30px;" /> -->
+			<!-- 						<p:inputText id="numCompteDebiteur" -->
+			<!-- 							value="#{clientManagedBean.numCompteDebiteur}" required="true" -->
+			<!-- 							label="Numéro compte débiteur" requiredMessage="Vous devez entrer un numéro" -->
+			<!-- 							placeholder="Numéro compte débiteur" type="text"> -->
+			<!-- 							<f:validateLength minimum="3" /> -->
+			<!-- 						</p:inputText> -->
 
 
 
-<!-- 						<div align="center"> -->
-<!-- 							<p:outputPanel layout="block" style="text-align:center"> -->
-<!-- 								<br /> -->
-<!-- 								<br /> -->
-<!-- 								<p:commandButton value="Réinitialiser" styleClass="" -->
-<!-- 									update=":form1:panel" process="@this" -->
-<!-- 									actionListener="#{clientManagedBean.reset}" /> -->
-<!-- 								<p:commandButton value="Sauvegarder" styleClass="" -->
-<!-- 									actionListener="#{clientManagedBean.virement}" -->
-<!-- 									update=":form1:messages, :form1:panel"> -->
-<!-- 								</p:commandButton> -->
-<!-- 							</p:outputPanel> -->
+			<!-- 						<h:outputText value="Numéro du compte à créditer" for="numCompteCrediteur" -->
+			<!-- 							style="padding-left: 30px; padding-right: 30px;" /> -->
+			<!-- 						<p:inputText id="numCompteCrediteur" -->
+			<!-- 							value="#{clientManagedBean.numCompteCrediteur}" required="true" -->
+			<!-- 							label="Numéro compte créditer" requiredMessage="Vous devez entrer un numéro" -->
+			<!-- 							placeholder="Numéro compte créditer" type="text"> -->
+			<!-- 							<f:validateLength minimum="3" /> -->
+			<!-- 						</p:inputText> -->
 
-<!-- 						</div> -->
-<!-- 					</h:panelGrid> -->
 
-<!-- 				</p:panel> -->
 
-<!-- 			</h:form> -->
+			<!-- 						<div align="center"> -->
+			<!-- 							<p:outputPanel layout="block" style="text-align:center"> -->
+			<!-- 								<br /> -->
+			<!-- 								<br /> -->
+			<!-- 								<p:commandButton value="Réinitialiser" styleClass="" -->
+			<!-- 									update=":form1:panel" process="@this" -->
+			<!-- 									actionListener="#{clientManagedBean.reset}" /> -->
+			<!-- 								<p:commandButton value="Sauvegarder" styleClass="" -->
+			<!-- 									actionListener="#{clientManagedBean.virement}" -->
+			<!-- 									update=":form1:messages, :form1:panel"> -->
+			<!-- 								</p:commandButton> -->
+			<!-- 							</p:outputPanel> -->
+
+			<!-- 						</div> -->
+			<!-- 					</h:panelGrid> -->
+
+			<!-- 				</p:panel> -->
+
+			<!-- 			</h:form> -->
 			<h:form>
-	
-						<h:outputText value="Numéro du compte à débiter" for="numCompteDebiteur"
-							 />
-						<p:inputText id="numCompteDebiteur"
-							value="#{clientManagedBean.numCompteDebiteur}" required="true"
-							label="Numéro compte débiteur" requiredMessage="Vous devez entrer un numéro"
-							placeholder="Numéro compte débiteur" type="text">
-							<f:validateLength minimum="3" />
-						</p:inputText>
+
+				<br />
+				<br />
+				<h:outputText value="Numéro du compte à débiter"
+					for="numCompteDebiteur" />
+				<p:inputText id="numCompteDebiteur"
+					value="#{clientManagedBean.numCompteDebiteur}" required="true"
+					label="Numéro compte débiteur"
+					requiredMessage="Vous devez entrer un numéro"
+					placeholder="Numéro compte débiteur" type="text">
+					<f:validateLength minimum="3" />
+				</p:inputText>
 
 
 
-						<h:outputText value="Numéro du compte à créditer" for="numCompteCrediteur"
-							/>
-						<p:inputText id="numCompteCrediteur"
-							value="#{clientManagedBean.numCompteCrediteur}" required="true"
-							label="Numéro compte créditer" requiredMessage="Vous devez entrer un numéro"
-							placeholder="Numéro compte créditer" type="text">
-							<f:validateLength minimum="3" />
-						</p:inputText>
 
-						<h:outputText value="Montant" for="montantTransfert"
-							/>
-						<p:inputText id="montantTransfert"
-							value="#{clientManagedBean.montantTransfert}" required="true"
-							label="montantTransfert" requiredMessage="Vous devez entrer un numéro"
-							placeholder="montantTransfert" type="text">
-							<f:validateLength minimum="1" />
-						</p:inputText>
+				<br />
+				<h:outputText value="Numéro du compte à créditer"
+					for="numCompteCrediteur" />
+				<p:inputText id="numCompteCrediteur"
+					value="#{clientManagedBean.numCompteCrediteur}" required="true"
+					label="Numéro compte créditer"
+					requiredMessage="Vous devez entrer un numéro"
+					placeholder="Numéro compte créditer" type="text">
+					<f:validateLength minimum="3" />
+				</p:inputText>
 
-						<div align="center">
+				<br />
+				<h:outputText value="Montant" for="montantTransfert" />
+				<p:inputText id="montantTransfert"
+					value="#{clientManagedBean.montantTransfert}" required="true"
+					label="montantTransfert"
+					requiredMessage="Vous devez entrer un numéro"
+					placeholder="montantTransfert" type="text">
+					<f:validateLength minimum="1" />
+					<f:validateDoubleRange minimum="0.0" />
+				</p:inputText>
 
-								<p:commandButton value="Réinitialiser" styleClass=""
-									actionListener="#{clientManagedBean.reset}" />
-								<p:commandButton value="Virement" styleClass=""
-									actionListener="#{clientManagedBean.virement}"
-									/>
+				<br />
+				<br />
+				<div align="center">
+
+					<p:commandButton value="Réinitialiser" styleClass=""
+						actionListener="#{clientManagedBean.reset}" />
+					<p:commandButton value="Virement" styleClass=""
+						actionListener="#{clientManagedBean.virement}" />
 
 
-						</div>
+				</div>
 
 
 

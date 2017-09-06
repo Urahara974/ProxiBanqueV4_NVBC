@@ -27,7 +27,7 @@ public class CompteCourant extends Compte {
 
 	@Override
 	public String toString() {
-		return "CompteCourant [getNumeroCompte()=" + getNumeroCompte() + ", getSolde()=" + getSolde() + "]";
+		return "CompteCourant [getSolde()=" + getSolde() + "]";
 	}
 
 	private static final long serialVersionUID = 3767712002819697465L;
@@ -38,8 +38,18 @@ public class CompteCourant extends Compte {
 	
 	@OneToOne(mappedBy = "compteCourant", cascade = CascadeType.ALL)
 	private Client client;
+	
+	@Column(name = "NUMERO_COMPTE")
+	private String numeroCompte;
 
 	
+	public void setNumeroCompte(String numeroCompte) {
+		this.numeroCompte = numeroCompte;
+	}
+	
+	public String getNumeroCompte() {
+		return numeroCompte;
+	}
 	
 	public Client getClient() {
 		return client;
@@ -90,8 +100,5 @@ public class CompteCourant extends Compte {
 		super(dateOuverture, solde);
 	}
 
-	public CompteCourant(String numeroCompte, Date dateOuverture, double solde) {
-		super(numeroCompte, dateOuverture, solde);
-	}
 
 }

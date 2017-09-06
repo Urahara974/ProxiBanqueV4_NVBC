@@ -25,7 +25,7 @@ import javax.persistence.OneToOne;
 public class CompteEpargne extends Compte {
 	@Override
 	public String toString() {
-		return "CompteEpargne [getNumeroCompte()=" + getNumeroCompte() + ", getSolde()=" + getSolde() + "]";
+		return "CompteEpargne [getSolde()=" + getSolde() + "]";
 	}
 
 	/**
@@ -38,6 +38,18 @@ public class CompteEpargne extends Compte {
 	
 	@OneToOne(mappedBy = "compteEpargne", cascade = CascadeType.ALL)
 	private Client client;
+	
+	@Column(name = "NUMERO_COMPTE")
+	private String numeroCompte;
+	
+	
+	public void setNumeroCompte(String numeroCompte) {
+		this.numeroCompte = numeroCompte;
+	}
+	
+	public String getNumeroCompte() {
+		return numeroCompte;
+	}
 
 	
 	
@@ -91,8 +103,5 @@ public class CompteEpargne extends Compte {
 		super(dateOuverture, solde);
 	}
 
-	public CompteEpargne(String numeroCompte, Date dateOuverture, double solde) {
-		super(numeroCompte, dateOuverture, solde);
-	}
 
 }
