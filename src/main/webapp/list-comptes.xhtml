@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui">
+<h:body>
+
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="contenu">
+
+
+			<h:body>
+				<div id="wrapper">
+					<div id="header">
+						<h2>Liste comptes</h2>
+
+						<!-- 					<h:outputText value="#{request.remoteUser}" /></h3>  -->
+					</div>
+				</div>
+
+				<h:form>
+					<br />
+					<div id="table">
+						<p:dataTable>
+
+							<p:column headerText="Test">
+
+							</p:column>
+						</p:dataTable>
+						<!-- 							<p:dataTable value="#{clientController.clients}" var="tempClient" -->
+						<!-- 								styleClass="demo-table" headerClass="demo-table-header" -->
+						<!-- 								rowClasses="demo-table-odd-row,demo-table-even-row"> -->
+
+						<!-- 								<p:column> -->
+						<!-- 									the column header -->
+						<!-- 									<f:facet name="header">Prénom </f:facet> -->
+
+						<!-- 									<h:outputText value="#{tempClient.firstName}" /> -->
+
+
+
+						<!-- 								</p:column> -->
+
+						<!-- 								<p:column> -->
+						<!-- 									the column header -->
+						<!-- 									<f:facet name="header">Nom </f:facet> -->
+
+						<!-- 									<h:outputText value="#{tempClient.lastName}" /> -->
+
+						<!-- 								</p:column> -->
+
+						<!-- 								<p:column> -->
+						<!-- 									the column header -->
+						<!-- 									<f:facet name="header">Ville</f:facet> -->
+
+						<!-- 									<h:outputText value="#{tempClient.ville}" /> -->
+
+						<!-- 								</p:column> -->
+
+						<!-- 								<p:column> -->
+						<!-- 									the column header -->
+						<!-- 									<f:facet name="header">Actions</f:facet> -->
+
+						<!-- 									 the value for each row -->
+						<!-- 									<h:commandLink value="Modifier" class="btn btn-warning btn-md" -->
+						<!-- 										action="#{clientController.loadClient(tempClient.idClient)}"/> -->
+
+						<!-- 									<h:commandLink value="Supprimer" class="btn btn-danger btn-md" -->
+						<!-- 										onclick="if (!confirm('Etes vous sûr de vouloir supprimer ce client?')) return false" -->
+						<!-- 										action="#{clientController.deleteClient(tempClient.idClient)}" /> -->
+
+
+
+						<!-- 								</p:column> -->
+
+
+						<!-- 							</p:dataTable> -->
+					</div>
+					<div>
+						<!-- 							<h:commandButton value="Se déconnecter" -->
+						<!-- 								action="#{clientController.logOut}"></h:commandButton> -->
+
+						<!-- creer un lien pour se delogger -->
+					</div>
+				</h:form>
+
+			</h:body>
+		</ui:define>
+
+	</ui:composition>
+
+
+
+</h:body>
+</html>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+	<ui:composition template="/WEB-INF/tags/layout.xhtml">
+		<ui:define name="content">
+
+<f:view locale="#{languageController.locale}"/>
+			<h:form id="form1">
+
+				<p:growl id="messages" showDetail="true" life="3000" />
+				<p:dataTable id="objects" var="object"
+					value="#{customerController.list}" styleClass="et_datatable"
+					emptyMessage="#{labels['list.valueNotFound']}" editable="true"
+					paginator="true" rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15" selectionMode="single"
+					rowKey="#{object.id}"
+					filteredValue="#{customerController.listSelected}"
+					widgetVar="customer">
+
+					<f:facet name="header">
+            <p:outputPanel>
+                <h:outputText value="#{labels['list.searchAllFields']}" />
+                <p:inputText id="globalFilter"
+								onkeyup="PF('customer').filter()" style="width:150px"
+								placeholder="#{labels['list.search']}" />
+            </p:outputPanel>
+        </f:facet>
+
+					<p:column style="width:30px">
+            <p:rowToggler />
+        </p:column>
+					<p:column headerText="#{labels['model.person.name']}"
+						sortBy="#{object.name}" filterBy="#{object.name}"
+						filterMatchMode="contains">
+						<h:outputText value="#{object.name}" />
+					</p:column>
+
+					<p:column headerText="#{labels['model.person.firstName']}"
+						sortBy="#{object.firstName}" filterBy="#{object.firstName}"
+						filterMatchMode="contains">
+						<h:outputText value="#{object.firstName}" />
+					</p:column>
+					
+					<p:column headerText="#{labels['model.customer.phone']}"
+						sortBy="#{object.phone}" filterBy="#{object.phone}"
+						filterMatchMode="contains">
+						<h:outputText value="#{object.phone}" />
+					</p:column>
+
+					<p:column headerText="#{labels['action.delete']}" style="width:8%">
+						<p:commandLink update=":form1:display"
+							oncomplete="PF('confirmDeleteDlg').show()"
+							image="ui-icon ui-icon-close" title="#{labels['action.delete']}">
+							<f:setPropertyActionListener value="#{object}"
+								target="#{customerController.beanSelected}" />
+							<h:outputText styleClass="ui-icon ui-icon-close" />
+						</p:commandLink>
+					</p:column>
+					<p:column headerText="#{labels['action.details']}" style="width:8%">
+						<p:commandLink update=":form1:display"
+							oncomplete="PF('detailsDlg').show()"
+							image="ui-icon ui-icon-search" title="#{labels['action.details']}">
+							<f:setPropertyActionListener value="#{object}"
+								target="#{customerController.beanSelected}" />
+							<h:outputText styleClass="ui-icon ui-icon-search" />
+						</p:commandLink>
+					</p:column>
+					<p:rowExpansion>
+            <p:panelGrid columns="2" columnClasses="value"
+							style="width:300px">
+
+							<h:outputText value="#{labels['model.person.id']}" />
+							<h:outputText value="#{object.id}" />
+
+							<h:outputText value="#{labels['model.person.name']}" />
+							<h:outputText value="#{object.name}" />
+
+							<h:outputText value="#{labels['model.person.firstName']}" />
+							<h:outputText value="#{object.firstName}" />
+
+							<h:outputText value="#{labels['model.customer.address']}" />
+							<h:outputText value="#{object.address}" />
+
+						</p:panelGrid>
+					</p:rowExpansion>
+				</p:dataTable>
+
+
+				<p:dialog header="#{labels['action.delete']}" widgetVar="confirmDeleteDlg"
+					resizable="false" width="400" height="60" showEffect="clip"
+					hideEffect="clip" modal="true">
+
+					<p:outputPanel layout="block" style="text-align:center">
+						<p:commandButton value="#{labels['action.yes']}"
+							update=":form1:messages,:form1:objects"
+							actionListener="#{customerController.delete}"
+							oncomplete="PF('confirmDeleteDlg').hide()" />
+						<p:commandButton value="#{labels['action.no']}"
+							onclick="PF('confirmDeleteDlg').hide()" type="button" />
+					</p:outputPanel>
+
+				</p:dialog>
+				
+<!-- 				Ajouter bouton liste compte -->
+
+
+
+				<p:dialog header="#{labels['action.update']}" widgetVar="detailsDlg" resizable="false"
+					width="750" height="400" showEffect="clip" hideEffect="clip"
+					modal="true">
+
+					<h:panelGrid id="display" columns="2" cellpadding="4"
+						style="margin:0 auto;">
+
+						<!-- Champ Nom -->
+						<h:outputText value="#{labels['model.person.name']}" style="padding-left: 30px; padding-right: 30px;" />
+
+						<p:inputText value="#{customerController.beanSelected.name}"
+							label="#{labels['model.person.name']}"
+							requiredMessage="#{labels['new.name']}"
+							validatorMessage="#{labels['new.invalidName']}">
+							<f:validateRegex
+								pattern="^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s-]+$"></f:validateRegex>
+						</p:inputText>
+
+						<!-- Champ Prénom -->
+						<h:outputText value="#{labels['model.person.firstName']}"
+							style="padding-left: 30px; padding-right: 30px;" />
+
+						<p:inputText value="#{customerController.beanSelected.firstName}"
+							label="#{labels['model.person.firstName']}"
+							requiredMessage="#{labels['new.firstName']}"
+							validatorMessage="#{labels['new.invalidFirst']}">
+							<f:validateRegex
+								pattern="^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s-]+$"></f:validateRegex>
+						</p:inputText>
+
+						<!-- Champ Adresse -->
+						<h:outputText value="#{labels['model.customer.address']}"
+							style="padding-left: 30px; padding-right: 30px;" />
+
+						<p:inputText value="#{customerController.beanSelected.address}"
+							label="#{labels['model.customer.address']}"
+							requiredMessage="#{labels['new.address']}"
+							validatorMessage="#{labels['new.invalidAdress']}">
+							<f:validateRegex
+								pattern="^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s-]+$"></f:validateRegex>
+						</p:inputText>
+
+						<!-- Champ code postal -->
+						<h:outputText value="#{labels['model.customer.zipCode']}"
+							style="padding-left: 30px; padding-right: 30px;" />
+
+						<p:inputText value="#{customerController.beanSelected.zipCode}"
+							label="#{labels['model.customer.zipCode']}"
+							requiredMessage="#{labels['new.zipCode']}"
+							validatorMessage="#{labels['new.invalidZip']}">
+							<f:validateRegex pattern="^[0-9]+$"></f:validateRegex>
+							<f:validateLength minimum="5" maximum="5" />
+						</p:inputText>
+
+						<!-- Champ ville -->
+						<h:outputText value="#{labels['model.customer.city']}"
+							style="padding-left: 30px; padding-right: 30px;" />
+
+						<p:inputText value="#{customerController.beanSelected.city}"
+							label="#{labels['model.customer.city']}"
+							requiredMessage="#{labels['new.city']}"
+							validatorMessage="#{labels['new.invalidCity']}">
+							<f:validateRegex
+								pattern="^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s-]+$"></f:validateRegex>
+						</p:inputText>
+
+						<!-- Champ telephone -->
+						<h:outputText value="#{labels['model.customer.phone']}"
+							style="padding-left: 30px; padding-right: 30px;" />
+
+						<p:inputText value="#{customerController.beanSelected.phone}"
+							label="#{labels['model.customer.phone']}"
+							requiredMessage="#{labels['new.phone']}"
+							validatorMessage="#{labels['new.invalidPhone']}">
+							<f:validateRegex pattern="^[0-9]+$"></f:validateRegex>
+							<f:validateLength minimum="10" maximum="10" />
+						</p:inputText>
+						<h:inputHidden value="#{customerController.beanSelected.id}" />
+
+					</h:panelGrid>
+
+					<p:outputPanel layout="block" style="text-align:center">
+						<br />
+						<br />
+						<p:commandButton value="#{labels['action.update']}"
+							update=":form1:objects, :form1:messages"
+							actionListener="#{customerController.update}" />
+						<p:commandButton value="#{labels['action.cancel']}"
+							onclick="PF('detailsDlg').hide()" type="button" />
+					</p:outputPanel>
+
+				</p:dialog>
+
+
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

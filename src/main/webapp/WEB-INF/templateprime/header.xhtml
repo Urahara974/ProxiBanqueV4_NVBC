@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	>
+   <body>
+      <ui:composition> 
+<!-- <h:form> -->
+<!--     <p:growl autoUpdate="true"/> -->
+ 
+<!--     <p:panelMenu style="width:300px"> -->
+<!--         <p:submenu label="Gestion client"> -->
+<!--             <p:menuitem value="Création client"  icon="ui-icon-disk" /> -->
+<!--             <p:menuitem value="Liste client" icon="ui-icon-arrowrefresh-1-w" /> -->
+<!--         </p:submenu> -->
+<!--         <p:submenu label="Gestion compte"> -->
+<!--            <p:menuitem value="Création compte"  icon="ui-icon-disk" /> -->
+<!--             <p:menuitem value="Liste compte" icon="ui-icon-arrowrefresh-1-w" /> -->
+<!--         </p:submenu> -->
+<!--         <p:separator /> -->
+        
+<!--     </p:panelMenu> -->
+<!-- </h:form> -->
+
+<!-- deuxieme test header style document -->
+<!-- <h:form> -->
+<!-- <p:tabMenu> -->
+<!--     <p:menuitem value="Home" icon="ui-icon-home"> -->
+<!--    </p:menuitem> -->
+
+<!--     <p:menuitem value="Gestion clients"  icon="ui-icon-person"> -->
+ 
+<!--     </p:menuitem> -->
+      
+    
+<!--     <p:menuitem value="Gestion comptes"  icon="ui-icon-money"> -->
+    
+<!--     </p:menuitem> -->
+<!-- </p:tabMenu> -->
+<!-- </h:form> -->
+
+
+<!-- test mega menu -->
+
+<h:form>
+
+        
+
+    <p:menubar>
+     <p:menuitem value="Accueil" url="home2.xhtml" icon="ui-icon-home" />
+    <p:submenu label="Gestion client" icon="ui-icon-person">
+
+<!--             <p:submenu label="Creation client"> -->
+              
+<!--             </p:submenu> -->
+       
+                <p:menuitem value="Creation client" url="new-client2.xhtml" />
+                <p:menuitem value="Liste clients" url="allCustomers2.xhtml" />
+              
+     
+ 
+        
+      </p:submenu>
+     
+    <p:submenu label="Gestion compte" icon="ui-icon-bank">
+
+<!--             <p:submenu label="Creation client"> -->
+              
+<!--             </p:submenu> -->
+       
+                <p:menuitem value="Liste comptes" url="allComptes.xhtml" />
+                <p:menuitem value="virement" url="virement2.xhtml" />
+              
+     
+ 
+        
+      </p:submenu>
+ 
+  </p:menubar>
+
+</h:form>
+
+      </ui:composition>	
+   </body>
+</html>

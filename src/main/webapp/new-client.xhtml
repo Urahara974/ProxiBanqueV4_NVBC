@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="contenu">
+
+
+			<h2>Création client</h2>
+
+
+			<h:form id="form1" style="">
+				<p:growl id="messages" showDetail="true" />
+				<p:panel id="panel">
+					<p:messages />
+					<!-- 					<h4>Informations client</h4> -->
+					<h:panelGrid id="display" columns="2" cellpadding="4" style="">
+
+
+						<!-- 						<p:column rowspan="2" style="font-weight: bold;"> -->
+						<!-- 							<h4>Informations client</h4> -->
+						<!-- 						</p:column> -->
+
+
+						<h:outputText value="Nom : *" for="lastName"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<p:inputText id="lastName"
+							value="#{clientManagedBean.client.lastName}" required="true"
+							label="Nom client" requiredMessage="Vous devez entrer un nom"
+							placeholder="Nom" type="text">
+							<f:validateLength minimum="3" />
+							<!-- 							<f:validateRegex pattern="^[0-9]" /> -->
+						</p:inputText>
+
+
+
+						<h:outputText value="Prénom : *" for="firstName"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<p:inputText id="firstName"
+							value="#{clientManagedBean.client.firstName}" required="true"
+							label="Prénom client"
+							requiredMessage="Vous devez entrer un prénom"
+							placeholder="Prénom" type="text">
+							<f:validateLength minimum="3" />
+<!-- 														<f:validateRegex pattern="^[0-9]" /> -->
+						</p:inputText>
+
+
+						<h:outputText value="Téléphone : *" for="telephone"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<p:inputText id="telephone"
+							value="#{clientManagedBean.client.telephone}" required="true"
+							label="Téléphone client"
+							requiredMessage="Vous devez entrer un numéro de téléphone"
+							placeholder="Téléphone" type="text">
+							<f:validateLength minimum="10" maximum="10" />
+							<f:validateRegex pattern="[0-9]*" />
+						</p:inputText>
+
+
+
+						<h:outputText value="Email : *" for="email"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<p:inputText id="email" value="#{clientManagedBean.client.email}"
+							required="true" label="Email client"
+							requiredMessage="Vous devez entrer un email" placeholder="Email"
+							type="email"
+							validatorMessage="Format email invalide : format attendu xxx@xxx.xx">
+							<f:validateRegex
+								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</p:inputText>
+
+
+
+						<h:outputText value="Numéro de rue : *" for="numero"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<p:inputText id="numero"
+							value="#{clientManagedBean.client.numero}" required="true"
+							label="Numéro de rue"
+							requiredMessage="Vous devez entrer un numéro de rue"
+							placeholder="Numéro de rue" type="text" />
+
+
+
+						<h:outputText value="Rue : *" for="rue"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<p:inputText id="rue" value="#{clientManagedBean.client.rue}"
+							required="true" label="Rue"
+							requiredMessage="Vous devez entrer une rue" placeholder="Rue"
+							type="text">
+							<f:validateLength minimum="3" />
+						</p:inputText>
+
+
+						<h:outputText value="Ville : *" for="ville"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<p:inputText id="ville" value="#{clientManagedBean.client.ville}"
+							required="true" label="Ville"
+							requiredMessage="Vous devez entrer une ville" placeholder="Ville"
+							type="text">
+							<f:validateLength minimum="3" />
+<!-- 														<f:validateRegex pattern="^[0-9]" /> -->
+						</p:inputText>
+
+
+						<h:outputText value="Code postal : *" for="codePostal"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<p:inputText id="codePostal"
+							value="#{clientManagedBean.client.codePostal}" required="true"
+							label="Code postal"
+							requiredMessage="Vous devez entrer un code postal"
+							placeholder="Code postal" type="text">
+							<f:validateLength minimum="5" maximum="5" />
+						</p:inputText>
+
+
+
+						<h:outputText value="Solde compte courant :" for="compteCourant"
+							style="padding-left: 30px; padding-right: 30px;" />
+
+						<p:inputText id="compteCourant"
+							value="#{clientManagedBean.client.compteCourant.solde}" required="true"
+							label="Compte Courant" requiredMessage="Required" />
+
+
+						
+						<h:outputText value="Solde compte epargne" for="compteEpargne"
+							style="padding-left: 30px; padding-right: 30px;" />
+
+						<p:inputText id="compteEpargne"
+							value="#{clientManagedBean.client.compteEpargne.solde}" required="true"
+							label="Compte Epargne" requiredMessage="Required" />
+
+
+						<div align="center">
+							<p:outputPanel layout="block" style="text-align:center">
+								<br />
+								<br />
+								<p:commandButton value="Réinitialiser" styleClass=""
+									update=":form1:panel" process="@this"
+									actionListener="#{clientManagedBean.reset}" />
+								<p:commandButton value="Sauvegarder" styleClass=""
+									actionListener="#{clientManagedBean.save}"
+									update=":form1:messages, :form1:panel">
+								</p:commandButton>
+							</p:outputPanel>
+
+						</div>
+
+
+					</h:panelGrid>
+
+				</p:panel>
+
+			</h:form>
+
+		</ui:define>
+
+	</ui:composition>
+</h:body>
+</html>
