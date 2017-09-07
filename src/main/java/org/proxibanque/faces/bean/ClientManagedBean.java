@@ -52,10 +52,67 @@ public class ClientManagedBean implements Serializable {
 	private String numCompteDebiteur;
 	private String numCompteCrediteur;
 	private double montantTransfert;
+	
+	private String numCompteDeb;
+	private List<String> listNumComptes = new ArrayList<>();
+	
+	private String numCompteCred;
+	private List<String> listNumComptesCred = new ArrayList<>();
 
 	
 	
-	
+	public String getNumCompteCred() {
+		return numCompteCred;
+	}
+
+
+	public void setNumCompteCred(String numCompteCred) {
+		this.numCompteCred = numCompteCred;
+	}
+
+
+	public List<String> getListNumComptesCred() {
+		try {
+			listNumComptesCred = new ArrayList<>();
+			listNumComptesCred.addAll(clientService.listNumeroCompteAll());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listNumComptesCred;
+	}
+
+
+	public void setListNumComptesCred(List<String> listNumComptesCred) {
+		this.listNumComptesCred = listNumComptesCred;
+	}
+
+
+	public String getNumCompteDeb() {
+		return numCompteDeb;
+	}
+
+
+	public void setNumCompteDeb(String numCompteDeb) {
+		this.numCompteDeb = numCompteDeb;
+	}
+
+
+	public List<String> getListNumComptes() {
+		try {
+			listNumComptes = new ArrayList<>();
+			listNumComptes.addAll(clientService.listNumeroCompteAll());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listNumComptes;
+	}
+
+
+	public void setListNumComptes(List<String> listNumComptes) {
+		this.listNumComptes = listNumComptes;
+	}
+
+
 	public NombreClient2 getNombreClient() {
 		return nombreClient;
 	}
@@ -103,9 +160,13 @@ public class ClientManagedBean implements Serializable {
 		this.clientSelected = new Client();
 		this.list = new ArrayList<Client>();
 		this.listSelected = new ArrayList<Client>();
+		this.listNumComptes = new ArrayList<>();
+		this.listNumComptesCred = new ArrayList<>();
 		this.numCompteDebiteur="";
 		this.numCompteCrediteur="";
 		this.montantTransfert=0.0;
+		this.numCompteDeb="";
+		this.numCompteCred="";
 		try {
 			this.list.addAll(clientService.findAll());
 			this.listSelected.addAll(list);
@@ -119,6 +180,17 @@ public class ClientManagedBean implements Serializable {
 	public void virement() {
 		try {
 			clientService.virement(this.numCompteDebiteur, this.numCompteCrediteur, this.montantTransfert);
+			refreshList();
+			notificationSuccess("virement");
+		} catch (Exception e) {
+			notificationError(e,"virement");
+			e.printStackTrace();
+		}
+	}
+	
+	public void virementNew() {
+		try {
+			clientService.virement(this.numCompteDeb, this.numCompteCred, this.montantTransfert);
 			refreshList();
 			notificationSuccess("virement");
 		} catch (Exception e) {

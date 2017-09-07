@@ -39,6 +39,25 @@ public class CompteDaoImpl {
 				.setParameter(1, numCompte).getResultList();
 	}
 	
+	
+	@SuppressWarnings("unchecked")
+	@Transactional(readOnly = true)
+	public List<String> listNumeroCompteCourantDaoAll() throws Exception {
+//		return getEntityManager().find(Compte.class, numCompte);
+		return (List<String>) getEntityManager()
+				.createQuery("select cc.numeroCompte from CompteCourant cc")
+				.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional(readOnly = true)
+	public List<String> listNumeroCompteEpargneDaoAll() throws Exception {
+//		return getEntityManager().find(Compte.class, numCompte);
+		return (List<String>) getEntityManager()
+				.createQuery("select ce.numeroCompte from CompteEpargne ce")
+				.getResultList();
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public List<Compte> infoCompteCourantDao(String numCompteCourant) throws Exception {

@@ -46,6 +46,18 @@
 
 
 
+
+					<p:column headerText="Numéro compte courant"
+						sortBy="#{object.compteCourant.numeroCompte}"
+						filterBy="#{object.compteCourant.numeroCompte}"
+						filterMatchMode="contains">
+						<h:outputText value="#{object.compteCourant.numeroCompte}" />
+					</p:column>
+
+					<p:column headerText="Solde compte courant">
+						<h:outputText value="#{object.compteCourant.solde}" />
+					</p:column>
+
 					<p:column headerText="Numéro compte epargne"
 						sortBy="#{object.compteEpargne.numeroCompte}"
 						filterBy="#{object.compteEpargne.numeroCompte}"
@@ -54,43 +66,13 @@
 					</p:column>
 
 
-					<p:column headerText="Solde compte epargne"
-						sortBy="#{object.compteEpargne}"
-						filterBy="#{object.compteEpargne}" filterMatchMode="contains">
+					<p:column headerText="Solde compte epargne">
 						<h:outputText value="#{object.compteEpargne.solde}" />
 					</p:column>
 
-						<p:column headerText="Numéro compte courant"
-						sortBy="#{object.compteCourant.numeroCompte}"
-						filterBy="#{object.compteCourant.numeroCompte}"
-						filterMatchMode="contains">
-						<h:outputText value="#{object.compteCourant.numeroCompte}" />
-					</p:column>
-					
-					<p:column headerText="Solde compte courant"
-						sortBy="#{object.compteCourant}"
-						filterBy="#{object.compteCourant}" filterMatchMode="contains">
-						<h:outputText value="#{object.compteCourant.solde}" />
-					</p:column>
-
-				
-
-					
 
 
 
-
-
-
-					<p:column headerText="Supprimer" style="width:8%">
-						<p:commandLink update=":form1:display"
-							oncomplete="PF('confirmDeleteDlg').show()"
-							image="ui-icon ui-icon-close" title="Delete">
-							<f:setPropertyActionListener value="#{object}"
-								target="#{clientManagedBean.clientSelected}" />
-							<h:outputText styleClass="ui-icon ui-icon-close" />
-						</p:commandLink>
-					</p:column>
 
 					<!-- test avec bouton modifier qui redirige vers page -->
 					<!-- 					<p:column> -->
@@ -100,15 +82,14 @@
 					<!-- 					</p:column> -->
 
 					<!-- test pop up virement -->
-					<p:column headerText="Virement" style="width:8%">
-						<p:commandLink update=":form1:display"
-							oncomplete="PF('confirmVirementDlg').show()"
-							image="ui-icon ui-icon-document" title="Virement">
+					<p:column headerText="Détails comptes" style="width:8%">
+						<p:commandLink update=":form1:display2"
+							oncomplete="PF('detailsDlg').show()"
+							image="ui-icon ui-icon-search" title="Détails des comptes client">
 							<f:setPropertyActionListener value="#{object}"
-								target="#{clientManagedBean.clientSelected.solde}" />
-							<h:outputText styleClass="ui-icon ui-icon-document" />
+								target="#{clientManagedBean.clientSelected}" />
+							<h:outputText styleClass="ui-icon ui-icon-search" />
 						</p:commandLink>
-
 					</p:column>
 					<!-- fin -->
 
@@ -116,30 +97,23 @@
 				</p:dataTable>
 
 
-				<p:dialog header="Voulez vous vraiment supprimer ?"
-					widgetVar="confirmDeleteDlg" resizable="false" width="400"
-					height="60" showEffect="clip" hideEffect="clip" modal="true">
 
-					<p:outputPanel layout="block" style="text-align:center">
-						<p:commandButton value="Oui"
-							update=":form1:messages,:form1:objects"
-							actionListener="#{clientManagedBean.delete}"
-							oncomplete="PF('confirmDeleteDlg').hide()" />
-						<p:commandButton value="Non"
-							onclick="PF('confirmDeleteDlg').hide()" type="button" />
-					</p:outputPanel>
-
-				</p:dialog>
 
 				<!-- test -->
 
-				<p:dialog header="Effectuer un virement"
-					widgetVar="confirmVirementDlg" resizable="false" width="700"
-					height="400" showEffect="clip" hideEffect="clip" modal="true">
+
+				<!-- fin -->
+
+
+
+
+
+				<p:dialog header="Informations détaillées des comptes du client"
+					widgetVar="detailsDlg" resizable="false" width="750" height="400"
+					showEffect="clip" hideEffect="clip" modal="true">
 
 					<h:panelGrid id="display2" columns="2" cellpadding="4"
 						style="margin:0 auto;">
-
 
 						<h:outputText value="Nom :"
 							style="padding-left: 30px; padding-right: 30px;" />
@@ -154,134 +128,68 @@
 							style="padding-left: 30px; padding-right: 30px;" />
 
 
+						<h:outputText value="Numéro de compte courant :"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<h:outputText
+							value="#{clientManagedBean.clientSelected.compteCourant.numeroCompte}"
+							style="padding-left: 30px; padding-right: 30px;" />
 
-						<h:outputText value="Solde Compte courant:"
+						<h:outputText value="Solde de compte courant :"
 							style="padding-left: 30px; padding-right: 30px;" />
 						<h:outputText
 							value="#{clientManagedBean.clientSelected.compteCourant.solde}"
 							style="padding-left: 30px; padding-right: 30px;" />
 
 
+						<h:outputText value="Date d'ouverture du compte courant :"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<h:outputText
+							value="#{clientManagedBean.clientSelected.compteCourant.dateOuverture}"
+							style="padding-left: 30px; padding-right: 30px;" />
 
-						<h:outputText value="Solde Compte épargne:"
+
+						<h:outputText
+							value="Autorisation du découvert du compte courant :"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<h:outputText
+							value="#{clientManagedBean.clientSelected.compteCourant.decouvert}"
+							style="padding-left: 30px; padding-right: 30px;" />
+
+						<h:outputText value="Numéro de compte épargne :"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<h:outputText
+							value="#{clientManagedBean.clientSelected.compteEpargne.numeroCompte}"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<h:outputText value="Solde du compte épargne :"
 							style="padding-left: 30px; padding-right: 30px;" />
 						<h:outputText
 							value="#{clientManagedBean.clientSelected.compteEpargne.solde}"
 							style="padding-left: 30px; padding-right: 30px;" />
 
-						<!-- 	<h:selectOneMenu value="#{clientManagedBean.clientSelected.compteEpargne.solde}"> -->
-						<!--     <f:selectItems value="#{clientManagedBean.clientSelected.compteEpargne}" /> -->
-						<!-- </h:selectOneMenu> -->
-						<br />
 
-						<p>Compte sur lequel vous souhaitez effectuer cette action :</p>
-						<select name="compte">
-							<option value="courant">Compte courant</option>
-			 			<option value="#{clientManagedBean.clientSelected.compteCourant.solde}"> #{clientManagedBean.clientSelected.compteCourant.solde}</option>
-		 					<option value="#{clientManagedBean.clientSelected.compteEpargne.solde}"> #{clientManagedBean.clientSelected.compteEpargne.solde}</option>
-						</select>
-
-						<p>Compte destinataire :</p>
-						<select name="compte">
-							<option value="courant">Compte courant</option>
-							<option value="#{clientManagedBean.list}">#{clientManagedBean.list}</option>
-						</select>
-						<br />
-             Montant : <br />
-						<input type="text" id="montant"></input>
-
-
-					</h:panelGrid>
-					<p:outputPanel layout="block" style="text-align:center">
-						<p:commandButton value="Oui"
-							update=":form1:messages,:form1:objects"
-							actionListener="#{clientManagedBean.virement}"
-							oncomplete="PF('confirmVirementDlg').hide()" />
-						<p:commandButton value="Non"
-							onclick="PF('confirmVirementDlg').hide()" type="button" />
-					</p:outputPanel>
-
-				</p:dialog>
-
-				<!-- fin -->
-
-
-
-
-
-				<p:dialog header="Informations détaillées client"
-					widgetVar="detailsDlg" resizable="false" width="750" height="400"
-					showEffect="clip" hideEffect="clip" modal="true">
-
-					<h:panelGrid id="display" columns="2" cellpadding="4"
-						style="margin:0 auto;">
-
-
-						<h:outputText value="Prenom"
+						<h:outputText value="Date d'ouverture du compte épargne :"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<h:outputText
+							value="#{clientManagedBean.clientSelected.compteEpargne.dateOuverture}"
 							style="padding-left: 30px; padding-right: 30px;" />
 
-						<p:inputText value="#{clientManagedBean.clientSelected.firstName}"
-							label="firstName" />
 
-						<h:outputText value="Nom"
+						<h:outputText value="Taux de rémunération du compte épargne :"
 							style="padding-left: 30px; padding-right: 30px;" />
-						<p:inputText value="#{clientManagedBean.clientSelected.lastName}" />
-
-
-						<h:outputText value="Telephone"
+						<h:outputText
+							value="#{clientManagedBean.clientSelected.compteEpargne.tauxRemuneration}"
 							style="padding-left: 30px; padding-right: 30px;" />
-						<p:inputText value="#{clientManagedBean.clientSelected.telephone}" />
 
 
-						<h:outputText value="Email*"
+						<h:outputText value="Numéro d'agence du client :"
 							style="padding-left: 30px; padding-right: 30px;" />
-						<p:inputText value="#{clientManagedBean.clientSelected.email}"
-							required="true" requiredMessage="est requis" />
-
-
-						<h:outputText value="Numéro de rue"
+						<h:outputText
+							value="#{clientManagedBean.clientSelected.compteCourant.numeroAgence}"
 							style="padding-left: 30px; padding-right: 30px;" />
-						<p:inputText value="#{clientManagedBean.clientSelected.numero}" />
-
-						<h:outputText value="Rue"
-							style="padding-left: 30px; padding-right: 30px;" />
-						<p:inputText value="#{clientManagedBean.clientSelected.rue}" />
-
-						<h:outputText value="Ville"
-							style="padding-left: 30px; padding-right: 30px;" />
-						<p:inputText value="#{clientManagedBean.clientSelected.ville}" />
-						<!-- 							required="true" label="Ville" -->
-						<!-- 							requiredMessage="Vous devez entrer une ville" placeholder="Ville" -->
-						<!-- 							type="text" /> -->
-
-
-						<h:outputText value="codePostal"
-							style="padding-left: 30px; padding-right: 30px;" />
-						<p:inputText
-							value="#{clientManagedBean.clientSelected.codePostal}" />
-						<!-- 							required="true" label="code postal" -->
-						<!-- 							requiredMessage="Vous devez entrer un code postal" -->
-						<!-- 							placeholder="code postal" type="text"> -->
-						<!-- 							<f:validateLength minimum="5" maximum="5" /> -->
 
 
 
 					</h:panelGrid>
-
-					<p:outputPanel layout="block" style="text-align:center">
-						<br />
-						<br />
-						<p:commandButton value="Valider"
-							update=":form1:objects, :form1:messages"
-							actionListener="#{clientManagedBean.update}"
-							oncomplete="PF('detailsDlg').hide()" />
-						<p:commandButton value="Annuler" onclick="PF('detailsDlg').hide()"
-							type="button" />
-					</p:outputPanel>
-
-
-
-
 
 				</p:dialog>
 

@@ -1,6 +1,7 @@
 package org.proxibanque.service;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ViewScoped;
@@ -114,18 +115,34 @@ public class ClientServiceImpl implements Serializable, ClientService {
 			System.out.println("\n\nnum CE cred : " + numCompteCrediteur.split("-")[numCompteDebiteur.split("-").length - 1] + "\n");
 			System.out.println("CE cred : " + compteCrediteur + "\n\n");
 		}
+		if(!numCompteDebiteur.equals(numCompteCrediteur)) {
+			soldeCompteDebiteur = compteDebiteur.getSolde();
+			nouveauSoldeCompteDebiteur = soldeCompteDebiteur - montantTransfert;
+			compteDebiteur.setSolde(nouveauSoldeCompteDebiteur);
+			
+			soldeCompteCrediteur = compteCrediteur.getSolde();
+			nouveauSoldeCompteCrediteur = soldeCompteCrediteur + montantTransfert;
+			compteCrediteur.setSolde(nouveauSoldeCompteCrediteur);
+			
+			System.out.println("\ncompteDebiteur NEW : " + compteDebiteur + "\n\n");
+			
+			System.out.println("\ncompteCrediteur NEW : " + compteCrediteur + "\n\n");
+			compteDao.miseAJourCompteDao(compteDebiteur);
+			compteDao.miseAJourCompteDao(compteCrediteur);
+		}
 //		compteDebiteur = compteDao.infoCompteDao(numCompteDebiteur);
 //		compteCrediteur = compteDao.infoCompteDao(numCompteCrediteur);
-		soldeCompteDebiteur = compteDebiteur.getSolde();
-		soldeCompteCrediteur = compteCrediteur.getSolde();
-		nouveauSoldeCompteDebiteur = soldeCompteDebiteur - montantTransfert;
-		nouveauSoldeCompteCrediteur = soldeCompteCrediteur + montantTransfert;
-		compteDebiteur.setSolde(nouveauSoldeCompteDebiteur);
-		System.out.println("\ncompteDebiteur NEW : " + compteDebiteur + "\n\n");
-		compteCrediteur.setSolde(nouveauSoldeCompteCrediteur);
-		System.out.println("\ncompteCrediteur NEW : " + compteCrediteur + "\n\n");
-		compteDao.miseAJourCompteDao(compteDebiteur);
-		compteDao.miseAJourCompteDao(compteCrediteur);
+
+	}
+	
+	@Override
+	public List<String> listNumeroCompteAll() throws Exception {
+		List<String> listComptes = new ArrayList<>();
+		List<String> listCompteCourant = compteDao.listNumeroCompteCourantDaoAll();
+		List<String> listCompteEpargne = compteDao.listNumeroCompteEpargneDaoAll();
+		listComptes.addAll(listCompteCourant);
+		listComptes.addAll(listCompteEpargne);
+		return listComptes;
 	}
 	
 }
