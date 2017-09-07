@@ -158,10 +158,17 @@
 								<p:commandButton value="Réinitialiser" styleClass=""
 									update=":form1:panel" process="@this"
 									actionListener="#{clientManagedBean.reset}" />
-								<p:commandButton value="Sauvegarder" styleClass=""
-									actionListener="#{clientManagedBean.save}"
-									update=":form1:messages, :form1:panel">
+<!-- 								<p:commandButton id="sauvegarderClient" value="Sauvegarder" -->
+<!-- 									styleClass="" actionListener="#{clientManagedBean.save}" -->
+<!-- 									update=":form1:messages, :form1:panel" -->
+<!-- 									onclick="if(!(#{clientManagedBean.nombreClient.validation()})){confirmation.show()}" -->
+<!-- 									> -->
+								<p:commandButton id="sauvegarderClient" value="Sauvegarder"
+									styleClass="" actionListener="#{clientManagedBean.save}"
+									update=":form1:messages, :form1:panel"
+										>
 								</p:commandButton>
+
 							</p:outputPanel>
 
 						</div>

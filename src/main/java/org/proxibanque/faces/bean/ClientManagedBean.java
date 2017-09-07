@@ -16,6 +16,8 @@ import org.primefaces.event.RowEditEvent;
 import org.proxibanque.dao.ClientsDao;
 import org.proxibanque.model.Client;
 import org.proxibanque.service.ClientService;
+import org.proxibanque.validator.NombreClient;
+import org.proxibanque.validator.NombreClient2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -31,6 +33,9 @@ public class ClientManagedBean implements Serializable {
 	
 	@Autowired
 	private ClientService clientService;
+	
+	@Autowired
+	private NombreClient2 nombreClient;
    
 	private Client client;
 	
@@ -47,6 +52,19 @@ public class ClientManagedBean implements Serializable {
 	private String numCompteDebiteur;
 	private String numCompteCrediteur;
 	private double montantTransfert;
+
+	
+	
+	
+	public NombreClient2 getNombreClient() {
+		return nombreClient;
+	}
+
+
+	public void setNombreClient(NombreClient2 nombreClient) {
+		this.nombreClient = nombreClient;
+	}
+
 
 	public String getNumCompteDebiteur() {
 		return numCompteDebiteur;

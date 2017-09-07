@@ -14,5 +14,9 @@
     	
   	</application>	
 	
+		<validator>
+		<validator-id>nombreClient</validator-id>
+		<validator-class>org.proxibanque.validator.NombreClient</validator-class>
+	</validator>
     
 </faces-config>

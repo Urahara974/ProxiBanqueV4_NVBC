@@ -31,8 +31,15 @@ public class Test {
 		Client client = new Client();
 		List<Client> reListClient = new ArrayList<Client>();
 		
-		String numCompteDebiteur = "CS-2017862747-PARIS12-CC";
-		String numCompteCrediteur = "DA-2017864217-PARIS12-CE";
+//		String numCompteDebiteur = "CS-2017862747-PARIS12-CC";
+//	
+//		String numCompteCrediteur = "DA-2017864217-PARIS12-CE";
+	
+		String CC = "CF-2017871121-PARIS12-CC";
+		String CE = "AA-201787121-PARIS12-CE";
+		
+		
+		
 		double montantTransfert=200.0;
 		
 //		reListClient = clientDao.findAll();
