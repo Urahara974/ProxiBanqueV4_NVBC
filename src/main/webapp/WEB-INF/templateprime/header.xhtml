@@ -5,85 +5,57 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	>
-   <body>
-      <ui:composition> 
-<!-- <h:form> -->
-<!--     <p:growl autoUpdate="true"/> -->
+	xmlns:p="http://primefaces.org/ui">
+	
+			
+			
+			<title>Proxibanque</title>
  
-<!--     <p:panelMenu style="width:300px"> -->
-<!--         <p:submenu label="Gestion client"> -->
-<!--             <p:menuitem value="Création client"  icon="ui-icon-disk" /> -->
-<!--             <p:menuitem value="Liste client" icon="ui-icon-arrowrefresh-1-w" /> -->
-<!--         </p:submenu> -->
-<!--         <p:submenu label="Gestion compte"> -->
-<!--            <p:menuitem value="Création compte"  icon="ui-icon-disk" /> -->
-<!--             <p:menuitem value="Liste compte" icon="ui-icon-arrowrefresh-1-w" /> -->
-<!--         </p:submenu> -->
-<!--         <p:separator /> -->
-        
-<!--     </p:panelMenu> -->
-<!-- </h:form> -->
-
-<!-- deuxieme test header style document -->
-<!-- <h:form> -->
-<!-- <p:tabMenu> -->
-<!--     <p:menuitem value="Home" icon="ui-icon-home"> -->
-<!--    </p:menuitem> -->
-
-<!--     <p:menuitem value="Gestion clients"  icon="ui-icon-person"> -->
- 
-<!--     </p:menuitem> -->
-      
-    
-<!--     <p:menuitem value="Gestion comptes"  icon="ui-icon-money"> -->
-    
-<!--     </p:menuitem> -->
-<!-- </p:tabMenu> -->
-<!-- </h:form> -->
+<body>
+	<ui:composition>
+		 <div class="container clearfix">
+   <img src="resources/img/logo.png"></img>
+            <img src="resources/img/banproxi.png" width="1000px" height="120"></img>
+</div>
+		<h:form>
 
 
-<!-- test mega menu -->
 
-<h:form>
+			<p:menubar>
 
-        
+						<p:menuitem value="Accueil" url="home.xhtml" icon="ui-icon-home" />
+						<p:submenu label="Gestion client" icon="ui-icon-person">
 
-    <p:menubar>
-     <p:menuitem value="Accueil" url="home2.xhtml" icon="ui-icon-home" />
-    <p:submenu label="Gestion client" icon="ui-icon-person">
+				
+							<p:menuitem value="Creation client" url="new-client.xhtml" />
+							<p:menuitem value="Liste clients" url="allCustomers.xhtml" />
 
-<!--             <p:submenu label="Creation client"> -->
-              
-<!--             </p:submenu> -->
-       
-                <p:menuitem value="Creation client" url="new-client2.xhtml" />
-                <p:menuitem value="Liste clients" url="allCustomers2.xhtml" />
-              
-     
- 
-        
-      </p:submenu>
-     
-    <p:submenu label="Gestion compte" icon="ui-icon-bank">
 
-<!--             <p:submenu label="Creation client"> -->
-              
-<!--             </p:submenu> -->
-       
-                <p:menuitem value="Liste comptes" url="allComptes.xhtml" />
-                <p:menuitem value="virement" url="virement2.xhtml" />
-              
-     
- 
-        
-      </p:submenu>
- 
-  </p:menubar>
 
-</h:form>
 
-      </ui:composition>	
-   </body>
+						</p:submenu>
+
+						<p:submenu label="Gestion compte" icon="ui-icon-gear">
+
+
+							<p:menuitem value="Liste comptes" url="allComptes.xhtml" />
+							<p:menuitem value="Virement" url="virement.xhtml" />
+
+						</p:submenu>
+
+
+						<p:menuitem value="Déconnexion" url="index.html"
+							icon="ui-icon-power" />
+
+
+
+
+
+
+			</p:menubar>
+
+		</h:form>
+
+	</ui:composition>
+</body>
 </html>

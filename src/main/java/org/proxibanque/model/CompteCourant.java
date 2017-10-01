@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.proxibanque.model;
 
 import java.time.LocalDate;
@@ -15,10 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-/**
- * @author winathan
- *
- */
 
 @Entity
 @DiscriminatorValue("COMPTE_COURANT")

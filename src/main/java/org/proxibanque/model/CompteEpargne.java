@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.proxibanque.model;
 
 import java.time.LocalDate;
@@ -15,10 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-/**
- * @author NVBC
- *
- */
 
 @Entity
 @DiscriminatorValue("COMPTE_EPARGNE")
@@ -28,9 +21,7 @@ public class CompteEpargne extends Compte {
 		return "CompteEpargne [getSolde()=" + getSolde() + "]";
 	}
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 8899368843962326692L;
 	
 	@Column(name = "TAUX_REMUNERATION")

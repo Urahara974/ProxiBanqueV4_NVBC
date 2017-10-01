@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.proxibanque.model;
 
 import java.io.Serializable;
@@ -15,29 +12,25 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-/**
- * @author NVBC
- *
- */
+
 @Entity
 @Table(name="VIREMENTS")
 public class Virement implements Serializable{
 	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -7964504933609514948L;
 	
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long numOperation;
-	private Date dateOperation;
-//	private String typeOperation;
+	@Column(name="DATE_OPERATION")
+	private Date dateOperation = new Date();
+	@Column(name="MONTANT")
 	private double montant;
-	@Column(name="CPTE_SOURCE")
+	@Column(name="COMPTE_DEBITEUR")
 	private String numCompteSource;
-	@Column(name="CPTE_CIBLE")
+	@Column(name="COMPTE_CREDITEUR")
 	private String numCompteCible;
 
 	@ManyToOne
@@ -68,17 +61,12 @@ public class Virement implements Serializable{
 		this.compte = compte;
 	}
 
-	/**
-	 * Constructeur par defaut
-	 */
+
 	public Virement() {
 		super();
 	}
 
 
-	/**
-	 * 
-	 */
 	public Virement(Long numOperation, Date dateOperation, double montant, String numCompteSource,
 			String numCompteCible) {
 		super();
@@ -89,7 +77,20 @@ public class Virement implements Serializable{
 		this.numCompteCible = numCompteCible;
 	}
 
-	
-	
+	public Virement(Date dateOperation, double montant, String numCompteSource, String numCompteCible) {
+		super();
+		this.dateOperation = dateOperation;
+		this.montant = montant;
+		this.numCompteSource = numCompteSource;
+		this.numCompteCible = numCompteCible;
+	}
 
+	public Virement(double montant, String numCompteSource, String numCompteCible) {
+		super();
+		this.montant = montant;
+		this.numCompteSource = numCompteSource;
+		this.numCompteCible = numCompteCible;
+	}
+
+	
 }

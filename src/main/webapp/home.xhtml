@@ -8,15 +8,42 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:body>
 
-	<ui:composition template="/template/template.xhtml">
-		<ui:define name="contenu">
+	<ui:composition template="/WEB-INF/templateprime/layout.xhtml">
+		<ui:define name="content">
 
-			<h2>Bienvenue sur l'accueil</h2>
+			<center>
+				<h2>Bienvenue sur ProxiBanqueSI</h2>
+			</center>
+			<br />
+			<br />
 
-Cette application vous permet de gérer des clients, créer, éditer et supprimer un client, gérer les comptes ...
 
-<p>Derniers virements effectués</p>
-			<p>Comptes à découvert</p>
+			<center>
+				Cette application vous permet de gérer des clients et les comptes
+				associées. <br />
+				<br />
+			</center>
+
+			<center>
+				Les différentes fonctionnalités disponibles dans l'application: <br />
+				<br />
+			</center>
+			
+				
+				<center>	création et modification client <br /> suppression client <br />
+					consultation la liste des clients <br />consultation liste des comptes du client <br /> effectuer un
+					virement </center> <br/> <br/>
+					<center>
+				<p:commandButton value="Création client" id="creation" styleClass="ui-priority-primary" action="new-client.xhtml"/>
+				<p:commandButton value="Virement" id="vir" styleClass="ui-priority-primary" style="
+    margin-left: 5px" action="virement.xhtml"/>
+				<p:commandButton value="Consulter liste clients" id="cli" styleClass="ui-priority-primary" style="
+    margin-left: 5px" action="allCustomers.xhtml"/>
+				<p:commandButton value="Consulter liste comptes" id="com" styleClass="ui-priority-primary" style="
+    margin-left: 5px" action="allComptes.xhtml"/>
+			</center>
+
+
 
 		</ui:define>
 	</ui:composition>

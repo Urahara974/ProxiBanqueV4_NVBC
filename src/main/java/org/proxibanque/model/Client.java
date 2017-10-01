@@ -24,9 +24,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-// @NamedQueries({
-// @NamedQuery(name="items.findAll", query="select o from Item o"),
-// })
 @DiscriminatorValue("CLIENT")
 public class Client extends Person implements Serializable {
 
@@ -45,11 +42,11 @@ public class Client extends Person implements Serializable {
 	@Column(name = "EMAIL")
 	private String email;
 
-	@Column(name = "TELEPHONE") // , nullable = false)
+	@Column(name = "TELEPHONE")
 	private String telephone = "";
 
 	@Column(name = "NUMERO_RUE")
-	private int numero;
+	private Integer numero;
 
 	@Column(name = "RUE")
 	private String rue;
@@ -58,18 +55,18 @@ public class Client extends Person implements Serializable {
 	private String ville;
 
 	@Column(name = "CODE_POSTAL")
-	private int codePostal;
+	private Integer codePostal;
 
 	@ManyToOne
 	private Conseiller conseiller;
 
 	
 	// Getters et Setters
-	public int getNumero() {
+	public Integer getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 
@@ -89,11 +86,11 @@ public class Client extends Person implements Serializable {
 		this.ville = ville.trim().toUpperCase();
 	}
 
-	public int getCodePostal() {
+	public Integer getCodePostal() {
 		return codePostal;
 	}
 
-	public void setCodePostal(int codePostal) {
+	public void setCodePostal(Integer codePostal) {
 		this.codePostal = codePostal;
 	}
 
@@ -135,12 +132,6 @@ public class Client extends Person implements Serializable {
 	
 	// Constructeurs
 
-	/**
-	 * @param firstName
-	 * @param lastName
-	 * @param address
-	 * @param tel
-	 */
 	public Client(String firstName, String lastName) {
 		super(firstName, lastName);
 	}
@@ -153,8 +144,8 @@ public class Client extends Person implements Serializable {
 		this.compteEpargne = compteEpargne;
 	}
 
-	public Client(String firstName, String lastName, String email, String telephone, int numero, String rue,
-			String ville, int codePostal) {
+	public Client(String firstName, String lastName, String email, String telephone, Integer numero, String rue,
+			String ville, Integer codePostal) {
 		super(firstName, lastName);
 		this.email = email;
 		this.telephone = telephone;

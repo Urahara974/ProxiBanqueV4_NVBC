@@ -16,8 +16,6 @@
 		<class>org.proxibanque.model.CompteCourant</class>
 		<class>org.proxibanque.model.CompteEpargne</class>
 		<class>org.proxibanque.model.Virement</class>
-		<class>org.proxibanque.model.Item</class>
-		<class>org.proxibanque.model.Order</class>
 		
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>

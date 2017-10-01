@@ -7,77 +7,82 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:body>
-<!-- 	<ui:composition template="/WEB-INF/tags/layout.xhtml"> -->
-<!-- 		<ui:define name="content"> -->
-
-	<ui:composition template="/WEB-INF/templateprime/layoutt.xhtml">
+	<!-- 	<ui:composition template="/WEB-INF/template/template.xhtml"> -->
+	<ui:composition template="/WEB-INF/templateprime/layout.xhtml">
 		<ui:define name="content">
+			<h2>Liste des clients</h2>
 
-		
+
 			<h:form id="form1">
 
 				<p:growl id="messages" showDetail="true" life="3000" />
 				<p:dataTable id="objects" var="object"
 					value="#{clientManagedBean.list}" styleClass="et_datatable"
-					emptyMessage="Empty..." editable="true" paginator="true"
+					emptyMessage="Liste vide..." editable="true" paginator="true"
 					rows="10"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="5,10,15" selectionMode="single"
 					rowKey="#{object.id}"
-					filteredValue="#{clientManagedBean.listSelected}">
+					filteredValue="#{clientManagedBean.listSelected}"
+					widgetVar="client" scrollable="true" scrollWidth="100%" reflow="true">
 
-					<p:column headerText="Prenom" sortBy="#{object.firstName}"
-						filterBy="#{object.firstName}" filterMatchMode="contains">
-						<h:outputText value="#{object.firstName}" />
-					</p:column>
+
 
 					<p:column headerText="Nom" sortBy="#{object.lastName}"
 						filterBy="#{object.lastName}" filterMatchMode="contains">
 						<h:outputText value="#{object.lastName}" />
 					</p:column>
-					
-					
-<!-- 					<p:column headerText="Quantity" sortBy="#{object.quantity}" -->
-<!-- 						filterBy="#{object.quantity}" filterMatchMode="contains"> -->
-<!-- 						<h:outputText value="#{object.quantity}" /> -->
-<!-- 					</p:column> -->
 
 
-
-
-					<p:column headerText="Supprimer" style="width:8%">
-						<p:commandLink update=":form1:display"
-							oncomplete="PF('confirmDeleteDlg').show()"
-							image="ui-icon ui-icon-close" title="Delete">
-							<f:setPropertyActionListener value="#{object}"
-								target="#{clientManagedBean.clientSelected}" />
-							<h:outputText styleClass="ui-icon ui-icon-close" />
-						</p:commandLink>
+					<p:column headerText="Prénom" sortBy="#{object.firstName}"
+						filterBy="#{object.firstName}" filterMatchMode="contains">
+						<h:outputText value="#{object.firstName}" />
 					</p:column>
-					<p:column headerText="Details" style="width:8%">
-						<p:commandLink update=":form1:display"
+
+					<p:column headerText="Détails client" style="width:8%">
+						<p:commandLink update=":form1:display2"
 							oncomplete="PF('detailsDlg').show()"
-							image="ui-icon ui-icon-search" title="Details">
+							image="ui-icon ui-icon-search" title="Détails client">
 							<f:setPropertyActionListener value="#{object}"
 								target="#{clientManagedBean.clientSelected}" />
 							<h:outputText styleClass="ui-icon ui-icon-search" />
 						</p:commandLink>
 					</p:column>
-
+					<p:column headerText="Mise à jour" style="width:8%">
+						<p:commandLink update=":form1:display"
+							oncomplete="PF('updateDlg').show()"
+							image="ui-icon ui-icon-document" title="Mise à jour">
+							<f:setPropertyActionListener value="#{object}"
+								target="#{clientManagedBean.clientSelected}" />
+							<h:outputText styleClass="ui-icon ui-icon-document" />
+						</p:commandLink>
+					</p:column>
+					<p:column headerText="Supprimer" style="width:8%">
+						<p:commandLink update=":form1:display"
+							oncomplete="PF('confirmDeleteDlg').show()"
+							image="ui-icon ui-icon-close" title="Supprimer">
+							<f:setPropertyActionListener value="#{object}"
+								target="#{clientManagedBean.clientSelected}" />
+							<h:outputText styleClass="ui-icon ui-icon-close" />
+						</p:commandLink>
+					</p:column>
 
 				</p:dataTable>
 
 
-				<p:dialog header="Voulez vous vraiment supprimer ?" widgetVar="confirmDeleteDlg"
-					resizable="false" width="400" height="60" showEffect="clip"
-					hideEffect="clip" modal="true">
+				<p:dialog header="!!!! Attention !!!! 
+				La suppression d'un client entraîne une régularisation des soldes de ses comptes 
+				à effectuer au guichet. 
+				Voulez vous vraiment supprimer ?"
+					widgetVar="confirmDeleteDlg" resizable="false" width="400"
+					height="60" showEffect="clip" hideEffect="clip" modal="true">
 
 					<p:outputPanel layout="block" style="text-align:center">
-						<p:commandButton value="Yes"
+						<p:commandButton value="Oui"
 							update=":form1:messages,:form1:objects"
 							actionListener="#{clientManagedBean.delete}"
 							oncomplete="PF('confirmDeleteDlg').hide()" />
-						<p:commandButton value="No"
+						<p:commandButton value="Non"
 							onclick="PF('confirmDeleteDlg').hide()" type="button" />
 					</p:outputPanel>
 
@@ -85,100 +90,156 @@
 
 
 
-				<p:dialog header="Informations détaillées client" widgetVar="detailsDlg" resizable="false"
-					width="750" height="400" showEffect="clip" hideEffect="clip"
-					modal="true">
+				<p:dialog header="Informations détaillées du client"
+					widgetVar="detailsDlg" resizable="false" width="750" height="400"
+					showEffect="clip" hideEffect="clip" modal="true">
 
-
-					<h:panelGrid id="display" columns="2" cellpadding="4"
+					<h:panelGrid id="display2" columns="2" cellpadding="4"
 						style="margin:0 auto;">
 
-
-<!-- 						<h:outputText value="Prenom" -->
-<!-- 							style="padding-left: 30px; padding-right: 30px;" /> -->
-
-<!-- 						<p:inputText value="#{clientManagedBean.clientSelected.firstName}" /> -->
-
-
-
-<!-- 						<h:outputText value="Nom" -->
-<!-- 							style="padding-left: 30px; padding-right: 30px;" /> -->
-<!-- 						<p:inputText value="#{clientManagedBean.clientSelected.lastName}" /> -->
-
-
-<!-- 						<h:outputText value="Telephone" -->
-<!-- 							style="padding-left: 30px; padding-right: 30px;" /> -->
-<!-- 						<p:inputText value="#{clientManagedBean.clientSelected.telephone}" /> -->
-
-										<h:outputText value="Prenom"
+						<h:outputText value="Nom :"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<h:outputText value="#{clientManagedBean.clientSelected.lastName}"
 							style="padding-left: 30px; padding-right: 30px;" />
 
-						<p:inputText value="#{clientManagedBean.clientSelected.firstName}"
-							label="firstName" />
-							
-						<h:outputText value="Nom"
+
+						<h:outputText value="Prénom :"
 							style="padding-left: 30px; padding-right: 30px;" />
-						<p:inputText value="#{clientManagedBean.clientSelected.lastName}" />
-
-
-						<h:outputText value="Telephone"
+						<h:outputText
+							value="#{clientManagedBean.clientSelected.firstName}"
 							style="padding-left: 30px; padding-right: 30px;" />
-						<p:inputText value="#{clientManagedBean.clientSelected.telephone}" />
 
 
-				<h:outputText value="Email*"
+						<h:outputText value="Téléphone :"
 							style="padding-left: 30px; padding-right: 30px;" />
-						<p:inputText value="#{clientManagedBean.clientSelected.email}"/>
-
-
-						<h:outputText value="Numéro de rue"
+						<h:outputText
+							value="#{clientManagedBean.clientSelected.telephone}"
 							style="padding-left: 30px; padding-right: 30px;" />
-						<p:inputText value="#{clientManagedBean.clientSelected.numero}" />
 
-						<h:outputText value="Rue"
+
+						<h:outputText value="Email :"
 							style="padding-left: 30px; padding-right: 30px;" />
-						<p:inputText value="#{clientManagedBean.clientSelected.rue}" />
-
-						<h:outputText value="Ville"
+						<h:outputText value="#{clientManagedBean.clientSelected.email}"
 							style="padding-left: 30px; padding-right: 30px;" />
-						<p:inputText value="#{clientManagedBean.clientSelected.ville}" />
-<!-- 							required="true" label="Ville" -->
-<!-- 							requiredMessage="Vous devez entrer une ville" placeholder="Ville" -->
-<!-- 							type="text" /> -->
 
 
-						<h:outputText value="codePostal"
+						<h:outputText value="Numéro de rue :"
 							style="padding-left: 30px; padding-right: 30px;" />
-						<p:inputText
-							value="#{clientManagedBean.clientSelected.codePostal}" />
-<!-- 							required="true" label="code postal" -->
-<!-- 							requiredMessage="Vous devez entrer un code postal" -->
-<!-- 							placeholder="code postal" type="text"> -->
-<!-- 							<f:validateLength minimum="5" maximum="5" /> -->
-					
-
-						
+						<h:outputText value="#{clientManagedBean.clientSelected.numero}"
+							style="padding-left: 30px; padding-right: 30px;" />
 
 
+						<h:outputText value="Rue :"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<h:outputText value="#{clientManagedBean.clientSelected.rue}"
+							style="padding-left: 30px; padding-right: 30px;" />
 
+
+						<h:outputText value="Ville :"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<h:outputText value="#{clientManagedBean.clientSelected.ville}"
+							style="padding-left: 30px; padding-right: 30px;" />
+
+						<!-- 							required="true" label="Ville" -->
+						<!-- 							requiredMessage="Vous devez entrer une ville" placeholder="Ville" -->
+						<!-- 							type="text" /> -->
+
+
+						<h:outputText value="codePostal :"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<h:outputText
+							value="#{clientManagedBean.clientSelected.codePostal}"
+							style="padding-left: 30px; padding-right: 30px;" />
+
+						<!-- 							required="true" label="code postal" -->
+						<!-- 							requiredMessage="Vous devez entrer un code postal" -->
+						<!-- 							placeholder="code postal" type="text"> -->
+						<!-- 							<f:validateLength minimum="5" maximum="5" /> -->
 
 
 
 					</h:panelGrid>
 
+				</p:dialog>
+
+
+
+				<p:dialog header="Mise à jour des informations du client"
+					widgetVar="updateDlg" resizable="false" width="750" height="400"
+					showEffect="clip" hideEffect="clip" modal="true">
+
+					<h:panelGrid id="display" columns="2" cellpadding="4"
+						style="margin:0 auto;">
+
+						<h:outputText value="Nom : *" for="lastName"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<p:inputText value="#{clientManagedBean.clientSelected.lastName}">
+						</p:inputText>
+
+
+
+						<h:outputText value="Prénom : *" for="firstName"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<p:inputText value="#{clientManagedBean.clientSelected.firstName}">
+						</p:inputText>
+
+
+
+
+						<h:outputText value="Téléphone : *" for="telephone"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<p:inputText value="#{clientManagedBean.clientSelected.telephone}">
+						</p:inputText>
+
+
+						<h:outputText value="Email : *" for="email"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<p:inputText value="#{clientManagedBean.clientSelected.email}">
+						</p:inputText>
+
+
+
+						<h:outputText value="Numéro de rue : *" for="numero"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<p:inputText value="#{clientManagedBean.clientSelected.numero}">
+						</p:inputText>
+
+
+						<h:outputText value="Rue : *" for="rue"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<p:inputText value="#{clientManagedBean.clientSelected.rue}">
+						</p:inputText>
+
+
+						<h:outputText value="Ville : *" for="ville"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<p:inputText value="#{clientManagedBean.clientSelected.ville}">
+						</p:inputText>
+
+
+
+
+						<h:outputText value="Code postal : *" for="codePostal"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<p:inputText
+							value="#{clientManagedBean.clientSelected.codePostal}">
+						</p:inputText>
+
+					</h:panelGrid>
+
+
 					<p:outputPanel layout="block" style="text-align:center">
 						<br />
 						<br />
-						<p:commandButton value="Mise à jour"
+						<p:commandButton value="Valider"
 							update=":form1:objects, :form1:messages"
 							actionListener="#{clientManagedBean.update}"
 							oncomplete="PF('detailsDlg').hide()" />
-						<p:commandButton value="Annuler" onclick="PF('detailsDlg').hide()"
+						<p:commandButton value="Annuler" onclick="PF('updateDlg').hide()"
 							type="button" />
 					</p:outputPanel>
 
 				</p:dialog>
-
 
 
 			</h:form>

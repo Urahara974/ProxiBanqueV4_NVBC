@@ -8,10 +8,12 @@ import javax.faces.bean.ViewScoped;
 
 import org.proxibanque.dao.ClientsDao;
 import org.proxibanque.dao.impl.CompteDaoImpl;
+import org.proxibanque.dao.impl.VirementDaoImpl;
 import org.proxibanque.model.Client;
 import org.proxibanque.model.Compte;
 import org.proxibanque.model.CompteCourant;
 import org.proxibanque.model.CompteEpargne;
+import org.proxibanque.model.Virement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +28,9 @@ public class ClientServiceImpl implements Serializable, ClientService {
 	
 	@Autowired
 	private CompteDaoImpl compteDao;
+	
+	@Autowired
+	private VirementDaoImpl virementDao; 
 	
 
 	
@@ -99,40 +104,32 @@ public class ClientServiceImpl implements Serializable, ClientService {
 		double nouveauSoldeCompteCrediteur;
 		if("CC".equals(numCompteDebiteur.split("-")[numCompteDebiteur.split("-").length - 1])) {
 			compteDebiteur = compteDao.infoCompteCourantDao(numCompteDebiteur).get(0);
-			System.out.println("\n\nnum CC : " + numCompteDebiteur.split("-")[numCompteDebiteur.split("-").length - 1] + "\n");
-			System.out.println("\nCC : " + compteDebiteur + "\n\n");
+			if(-((CompteCourant) compteDebiteur).getDecouvert() > compteDebiteur.getSolde() - montantTransfert) {
+				montantTransfert = 0.0;
+			}
 		}else {
 			compteDebiteur = compteDao.infoCompteEpargneDao(numCompteDebiteur).get(0);
-			System.out.println("\n\nnum CE : " + numCompteDebiteur.split("-")[numCompteDebiteur.split("-").length - 1] + "\n");
-			System.out.println("\nCE : " + compteDebiteur + "\n\n");
+			if(0 > compteDebiteur.getSolde() - montantTransfert) {
+				montantTransfert = 0.0;
+			}
 		}
 		if("CC".equals(numCompteCrediteur.split("-")[numCompteCrediteur.split("-").length - 1])) {
 			compteCrediteur = compteDao.infoCompteCourantDao(numCompteCrediteur).get(0);
-			System.out.println("\n\nnum CC cred : " + numCompteCrediteur.split("-")[numCompteDebiteur.split("-").length - 1] + "\n");
-			System.out.println("CC cred : " + compteCrediteur + "\n\n");
 		}else {
 			compteCrediteur = compteDao.infoCompteEpargneDao(numCompteCrediteur).get(0);
-			System.out.println("\n\nnum CE cred : " + numCompteCrediteur.split("-")[numCompteDebiteur.split("-").length - 1] + "\n");
-			System.out.println("CE cred : " + compteCrediteur + "\n\n");
 		}
 		if(!numCompteDebiteur.equals(numCompteCrediteur)) {
 			soldeCompteDebiteur = compteDebiteur.getSolde();
 			nouveauSoldeCompteDebiteur = soldeCompteDebiteur - montantTransfert;
 			compteDebiteur.setSolde(nouveauSoldeCompteDebiteur);
-			
 			soldeCompteCrediteur = compteCrediteur.getSolde();
 			nouveauSoldeCompteCrediteur = soldeCompteCrediteur + montantTransfert;
 			compteCrediteur.setSolde(nouveauSoldeCompteCrediteur);
-			
-			System.out.println("\ncompteDebiteur NEW : " + compteDebiteur + "\n\n");
-			
-			System.out.println("\ncompteCrediteur NEW : " + compteCrediteur + "\n\n");
 			compteDao.miseAJourCompteDao(compteDebiteur);
 			compteDao.miseAJourCompteDao(compteCrediteur);
 		}
-//		compteDebiteur = compteDao.infoCompteDao(numCompteDebiteur);
-//		compteCrediteur = compteDao.infoCompteDao(numCompteCrediteur);
-
+		Virement enregistrementVirement = new Virement(montantTransfert, numCompteDebiteur, numCompteCrediteur);
+		virementDao.persist(enregistrementVirement);
 	}
 	
 	@Override

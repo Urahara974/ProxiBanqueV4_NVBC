@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.proxibanque.model;
 
 import java.io.Serializable;
@@ -19,10 +16,7 @@ import javax.persistence.Table;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * @author NVBC
- *
- */
+
 @Entity
 @Table(name = "PERSONNES")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -41,10 +35,10 @@ public class Person implements Serializable {
 	@Column(name = "ID", nullable = false)
 	private int id;
 	
-	@Column(name = "FIRST_NAME")//, nullable = false)
+	@Column(name = "FIRST_NAME")
 	private String firstName = "";
 	
-	@Column(name = "LAST_NAME")//, nullable = false)
+	@Column(name = "LAST_NAME")
 	private String lastName = "";
 	
 

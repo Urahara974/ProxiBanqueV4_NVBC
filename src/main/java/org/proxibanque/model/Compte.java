@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.proxibanque.model;
 
 import java.io.Serializable;
@@ -25,13 +22,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-/**
- * @author NVBC
- *
- */
+
 
 @Entity
-//@ManagedBean
 @Table(name="COMPTES")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "TYPE_COMPTE", discriminatorType = DiscriminatorType.STRING)
@@ -108,28 +101,16 @@ public abstract class Compte implements Serializable{
 	}
 	
 	
-	/**
-	 * Constructeur par defaut
-	 */
+
 	public Compte() {
 		super();
 	}
 
-	/**
-	 * Constructeur en utilisant les parametres :
-	 * 
-	 * @param numeroCompte
-	 * @param dateOuverture
-	 * @param solde
-	 */
+
 	public Compte(Date dateOuverture, double solde) {
 		this.dateOuverture = dateOuverture;
 		Solde = solde;
 	}
-
-	
-	
-	
 
 
 }

@@ -8,10 +8,6 @@ import org.proxibanque.model.Conseiller;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * @author NVBC
- *
- */
 
 @Component
 @Transactional

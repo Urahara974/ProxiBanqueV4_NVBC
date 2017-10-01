@@ -8,8 +8,9 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:body>
 	<!-- 	<ui:composition template="/WEB-INF/template/template.xhtml"> -->
-	<ui:composition template="/WEB-INF/templateprime/layoutt.xhtml">
+	<ui:composition template="/WEB-INF/templateprime/layout.xhtml">
 		<ui:define name="content">
+			<h2>Liste des comptes</h2>
 
 
 			<h:form id="form1">
@@ -18,10 +19,11 @@
 				<p:dataTable id="objects" var="object"
 					value="#{clientManagedBean.list}" styleClass="et_datatable"
 					emptyMessage="Empty..." editable="true" paginator="true" rows="10"
+					scrollable="true" scrollWidth="100%"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="5,10,15" selectionMode="single"
 					rowKey="#{object.id}"
-					filteredValue="#{clientManagedBean.listSelected}">
+					filteredValue="#{clientManagedBean.listSelected}" reflow="true">
 
 					<p:column headerText="Nom" sortBy="#{object.lastName}"
 						filterBy="#{object.lastName}" filterMatchMode="contains">
@@ -89,6 +91,16 @@
 							<f:setPropertyActionListener value="#{object}"
 								target="#{clientManagedBean.clientSelected}" />
 							<h:outputText styleClass="ui-icon ui-icon-search" />
+						</p:commandLink>
+					</p:column>
+
+					<p:column headerText="Mise à jour des comptes" style="width:8%">
+						<p:commandLink update=":form1:display"
+							oncomplete="PF('updateDlg').show()"
+							image="ui-icon ui-icon-document" title="Mise à jour des comptes">
+							<f:setPropertyActionListener value="#{object}"
+								target="#{clientManagedBean.clientSelected}" />
+							<h:outputText styleClass="ui-icon ui-icon-document" />
 						</p:commandLink>
 					</p:column>
 					<!-- fin -->
@@ -190,6 +202,68 @@
 
 
 					</h:panelGrid>
+
+				</p:dialog>
+
+
+				<p:dialog header="Mise à jour des informations des comptes"
+					widgetVar="updateDlg" resizable="false" width="750" height="400"
+					showEffect="clip" hideEffect="clip" modal="true">
+
+					<h:panelGrid id="display" columns="2" cellpadding="4"
+						style="margin:0 auto;">
+
+
+						<h:outputText value="Solde de compte courant :"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<p:inputText
+							value="#{clientManagedBean.clientSelected.compteCourant.solde}">
+						</p:inputText>
+
+
+						<h:outputText
+							value="Autorisation du découvert du compte courant :"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<p:inputText
+							value="#{clientManagedBean.clientSelected.compteCourant.decouvert}">
+						</p:inputText>
+
+
+
+						<h:outputText value="Solde du compte épargne :"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<p:inputText
+							value="#{clientManagedBean.clientSelected.compteEpargne.solde}">
+						</p:inputText>
+
+
+
+						<h:outputText value="Taux de rémunération du compte épargne :"
+							style="padding-left: 30px; padding-right: 30px;" />
+						<p:inputText
+							value="#{clientManagedBean.clientSelected.compteEpargne.tauxRemuneration}">
+						</p:inputText>
+
+
+
+
+
+
+
+
+					</h:panelGrid>
+
+
+					<p:outputPanel layout="block" style="text-align:center">
+						<br />
+						<br />
+						<p:commandButton value="Valider"
+							update=":form1:objects, :form1:messages"
+							actionListener="#{clientManagedBean.update}"
+							oncomplete="PF('detailsDlg').hide()" />
+						<p:commandButton value="Annuler" onclick="PF('updateDlg').hide()"
+							type="button" />
+					</p:outputPanel>
 
 				</p:dialog>
 
